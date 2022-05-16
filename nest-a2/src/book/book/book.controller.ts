@@ -1,7 +1,7 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
 import { Book } from "src/book/book/book.schema";
 import { BookService } from "src/book/book/book.service";
-
+import { ParseIntPipe } from "@nestjs/common"
 
 @Controller('books')
 export class BookController {
@@ -24,8 +24,9 @@ export class BookController {
     }
 
     @Get('/:id')
-    async findById(@Res() response, @Param('id') id) {
+    async findById(@Res() response, @Param('id') id: string) {
         const book = await this.bookService.readById(id);
+        console.log("type of id", typeof id);
         return response.status(HttpStatus.OK).json({
             book
         })
