@@ -1,5 +1,5 @@
 import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
-import { Book } from "src/book/book/book.schema";
+import { Book, PostRouteDto } from "src/book/book/book.schema";
 import { BookService } from "src/book/book/book.service";
 import { ParseIntPipe } from "@nestjs/common"
 
@@ -8,7 +8,7 @@ export class BookController {
     constructor(private readonly bookService: BookService){}
 
     @Post()
-    async createBook(@Res() response, @Body() book: Book) {
+    async createBook(@Res() response, @Body() book: PostRouteDto) {
         const newBook = await this.bookService.create(book);
         return response.status(HttpStatus.CREATED).json({
             newBook

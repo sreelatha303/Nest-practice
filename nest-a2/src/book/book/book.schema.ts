@@ -1,5 +1,7 @@
 import { Prop, Schema, SchemaFactory } from "@nestjs/mongoose";
 import { Document } from "mongoose";
+import { IsNumber, IsString } from "class-validator";
+
 
 export type BookDocument = Book & Document;
 
@@ -17,3 +19,18 @@ export class Book {
 }
 
 export const BookSchema = SchemaFactory.createForClass(Book);
+
+//dto schema for post
+ export class PostRouteDto {
+     @IsString()
+     name: string;
+
+     @IsString()
+     author: string;
+
+     @IsNumber()
+     publishYear: number
+
+
+
+ }
