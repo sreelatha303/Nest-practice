@@ -1,4 +1,4 @@
-import { Body, Controller, Delete, Get, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
+import { Body, Controller, Delete, Get, HttpException, HttpStatus, Param, Post, Put, Res } from "@nestjs/common";
 import { Book, PostRouteDto } from "src/book/book/book.schema";
 import { BookService } from "src/book/book/book.service";
 import { ParseIntPipe } from "@nestjs/common"
@@ -25,6 +25,12 @@ export class BookController {
 
     @Get('/:id')
     async findById(@Res() response, @Param('id') id: string) {
+        // throw new HttpException('Forbidden', HttpStatus.FORBIDDEN);
+        // To override status code and error message
+        // throw new HttpException({
+        //     status: 100,
+        //     error: "This is custome error message"
+        // }, HttpStatus.FORBIDDEN);
         const book = await this.bookService.readById(id);
         console.log("type of id", typeof id);
         return response.status(HttpStatus.OK).json({

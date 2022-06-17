@@ -8,6 +8,7 @@ async function bootstrap() {
     transform: true,
     whitelist: true // to automatically remove the undefined properties
   }));
+  app.enableCors();
   await app.listen(3000);
 }
 bootstrap();
